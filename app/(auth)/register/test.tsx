@@ -1,10 +1,12 @@
 "use client";
 import { authRequest } from "@/apiRequest/auth";
+import { cinemaRoomRequest } from "@/apiRequest/cinema-room";
 import { Button } from "@/components/ui/button";
 import { useAuthMutation } from "@/hooks/mutations/useAuth.mutation";
 
 import { useSessionStore } from "@/stores/sesionStore";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
@@ -12,6 +14,15 @@ const TestComponents = () => {
     const { user } = useSessionStore();
     const { logout } = useAuthMutation();
     const router = useRouter();
+    const [product,setProduct] = useState([]);
+    const handleProduct = async () => {
+        const res=  await cinemaRoomRequest.getAllCinemaRooms()
+        setProduct(res);
+    }
+    useEffect(() => {
+        handleProduct();
+    },[])
+    console.log("Cinema Rooms:", product);
     const handleLogout = async () => {
         logout.mutate(undefined, {
             onSuccess: async (res) => {
