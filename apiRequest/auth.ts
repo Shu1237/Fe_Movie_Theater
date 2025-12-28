@@ -17,4 +17,18 @@ export const authRequest = {
     http.post("/api/auth/logout", undefined, {
       baseURL: "",
     }),
+
+    // call client to refresh token
+  refreshTokenClient: (body: { refresh_token: string }) =>
+    http.post<{access_token:string}>("/auth/refresh_token", body),
+
+  // call sever to refresh token - GỬI access_token thay vì refresh_token
+  refreshTokenServer: (body: {access_token: string }) =>
+    http.post<{access_token:string}>("/api/auth/refresh_token", body,
+      {
+        baseURL: ""
+
+      }
+    ),
+      
 };

@@ -13,5 +13,5 @@ export type JWTUserType = {
 };
 
 export interface AuthContextType {
-  setTokenFromContext: (accessToken: string) => void;
+  setTokenFromContext: (accessToken: string, refreshToken: string) => void;
 }

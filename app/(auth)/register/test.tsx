@@ -23,6 +23,7 @@ const TestComponents = () => {
                 }
             },
             onError: (error) => {
+                console.log("Logout error:", error);
                 toast.error(error?.message || "Đăng xuất thất bại!");
             }
         });

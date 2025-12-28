@@ -50,7 +50,7 @@ export function LoginForm() {
     login.mutate(data, {
       onSuccess: async (res) => {
         if (res.success) {
-          setTokenFromContext(res.data.access_token);
+          setTokenFromContext(res.data.access_token, res.data.refresh_token);
           // server
           try {
             await authRequest.auth({

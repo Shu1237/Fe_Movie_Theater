@@ -8,26 +8,28 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({
   children,
-  initialToken,
+  initialAccessToken,
+  initialRefreshToken
 }: {
   children: ReactNode;
-  initialToken?: string | null;
+  initialAccessToken?: string | null;
+  initialRefreshToken?: string | null;
 }) => {
   const setSession = useSessionStore((state) => state.setSession);
 
-  const setTokenFromContext = (accessToken: string) => {
-    setSession(accessToken);
+  const setTokenFromContext = (accessToken: string, refreshToken: string) => {
+    setSession(accessToken, refreshToken);
   };
 
-  // Đồng bộ token từ cookie vào Zustand khi component mount hoặc initialToken thay đổi
+
   useEffect(() => {
-    if (initialToken) {
-      setSession(initialToken);
+    if (initialAccessToken && initialRefreshToken) {
+      setSession(initialAccessToken, initialRefreshToken);
     }
-  }, [initialToken, setSession]);
+  }, [initialAccessToken, initialRefreshToken, setSession]);
 
   return (
-    <AuthContext.Provider value={{ setTokenFromContext }}>
+    <AuthContext.Provider value={{setTokenFromContext  }}>
       {children}
     </AuthContext.Provider>
   );

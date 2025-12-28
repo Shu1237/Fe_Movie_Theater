@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 
 // Danh sách các route cần bảo vệ
 const privatePaths = ['/dashboard']
-const authPaths = ['/login',]
+const authPaths = ['/login']
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl

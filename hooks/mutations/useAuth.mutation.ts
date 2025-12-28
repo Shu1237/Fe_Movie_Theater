@@ -13,5 +13,6 @@ export const useAuthMutation = () => {
              return await authRequest.logoutClient()
         }
      });
+     
     return { login, logout };
 }

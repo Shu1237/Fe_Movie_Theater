@@ -31,6 +31,7 @@ export default async function RootLayout({
 
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value || "";
+  const refreshToken = cookieStore.get("refresh_token")?.value || "";
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -45,7 +46,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
 
-            <AuthProvider initialToken={accessToken}>
+            <AuthProvider initialAccessToken={accessToken} initialRefreshToken={refreshToken}>
               {children}
             </AuthProvider>
             <Toaster richColors/>
